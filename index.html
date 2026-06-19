@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Audit Explorer | Palpites Copa 2026</title>
+    <meta name="description" content="Explorador público dos blocos de auditoria do bolão da Copa 2026.">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Palpites Copa 2026</p>
+        <h1>Audit Explorer</h1>
+      </div>
+      <div class="topbar__status" id="loadStatus">Carregando blocos...</div>
+    </header>
+
+    <main class="app-shell">
+      <section class="summary-grid" aria-label="Resumo da cadeia">
+        <article class="metric">
+          <span class="metric__label">Blocos</span>
+          <strong id="totalBlocks">--</strong>
+        </article>
+        <article class="metric">
+          <span class="metric__label">Palpites</span>
+          <strong id="totalPredictions">--</strong>
+        </article>
+        <article class="metric">
+          <span class="metric__label">Jogos</span>
+          <strong id="totalMatches">--</strong>
+        </article>
+        <article class="metric metric--status" id="chainStatusCard">
+          <span class="metric__label">Integridade</span>
+          <strong id="chainStatus">--</strong>
+        </article>
+      </section>
+
+      <section class="toolbar" aria-label="Filtros">
+        <label class="search">
+          <span>Buscar</span>
+          <input id="searchInput" type="search" placeholder="bloco, hash, time ou usuário">
+        </label>
+        <div class="segmented" role="group" aria-label="Filtro de integridade">
+          <button class="segmented__button is-active" type="button" data-filter="all">Todos</button>
+          <button class="segmented__button" type="button" data-filter="valid">Válidos</button>
+          <button class="segmented__button" type="button" data-filter="invalid">Alertas</button>
+        </div>
+      </section>
+
+      <section class="chain-band" aria-label="Visualização da blockchain">
+        <div class="chain-track" id="chainTrack"></div>
+      </section>
+
+      <section class="workspace">
+        <aside class="block-list-panel" aria-label="Blocos">
+          <div class="panel-heading">
+            <h2>Blocos</h2>
+            <span id="visibleBlocks">--</span>
+          </div>
+          <div class="block-list" id="blockList"></div>
+        </aside>
+
+        <section class="details-panel" aria-live="polite">
+          <div class="block-detail" id="blockDetail">
+            <div class="empty-state">
+              <h2>Nenhum bloco selecionado</h2>
+              <p>Os blocos aparecerão aqui após o carregamento.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="blockButtonTemplate">
+      <button class="block-row" type="button">
+        <span class="block-row__number"></span>
+        <span class="block-row__main">
+          <strong class="block-row__title"></strong>
+          <span class="block-row__meta"></span>
+        </span>
+        <span class="block-row__badge"></span>
+      </button>
+    </template>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>

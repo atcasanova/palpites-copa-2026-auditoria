@@ -1,0 +1,393 @@
+{
+  "block_number": 48,
+  "created_at": "2026-06-24T01:00:05.996886",
+  "hash": "aec259526bdea08bd34433f8efb5fb882e115a1b4197fddad0e308e811a9e7a5",
+  "match": {
+    "group_name": "Grupo K",
+    "id": 64,
+    "kickoff_time": "2026-06-24T02:00:00",
+    "round": "Dia 13",
+    "stage": "Group Stage",
+    "team1_name": "Colômbia",
+    "team2_name": "RD Congo"
+  },
+  "payload": [
+    {
+      "goals_team1": 3,
+      "goals_team2": 0,
+      "username": "donfredoncarica"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "CLARA MARIA ALVES BEZERRA"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "danieloliveira"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Ederlss"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "GLIVANUNES"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "MauroEvangelista"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 0,
+      "username": "Paulomendonca13"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "marcos.melo"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "rodriguinho"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "felipedario"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "Humbertorps"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "mattheusf18"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 1,
+      "username": "Erikatextor"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Joviliano"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "tbastos"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "tsi"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "mestrejoel"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "Francisco Eriberto Vieira"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "marcelotole"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "tcavalcantebarros@gmail.com"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "fabiano"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "SergioGoncalves"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "VICTORBEZERRA"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "alexandreeabra"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "esequiaspierre"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "daviahn"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "atcasanova"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "italloneves"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "leolenza"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "Francisco Ribeiro"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "leandraodamassa"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "Fernanda Rosa Gomes"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "CarlosRodrigoLima"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "Andrigo"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 0,
+      "username": "Ismaellacerda"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "Leandro Moreira da Silva"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "ronilson"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Ariadne"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "Daiany"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "Jota"
+    },
+    {
+      "goals_team1": 4,
+      "goals_team2": 0,
+      "username": "vitorouab"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "paulofernandes"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "EDUARDO SALINAS"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "welsinner"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "CathLuna"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Angela Clara"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "Eunides"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "FelipeLopes"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "LeonardoRibeiro"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "Carlos Pilla"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "Bruno Anacleto"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "hugoalm"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "fernanda"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Raphael Pecly"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "rafaelcabral"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "achaves"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Sobrosa"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "Wallyaonreis"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 0,
+      "username": "Marcia santos"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Wescley"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "sampaio"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Fekilis"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 2,
+      "username": "tiagoarrais"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "André Agatte"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "pfpastore"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "ERMES"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "luciano_pavao_"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "daniel.fernandes"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "Nilva veiga"
+    },
+    {
+      "goals_team1": 1,
+      "goals_team2": 1,
+      "username": "LoganHelsing"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Fjscorrea"
+    },
+    {
+      "goals_team1": 3,
+      "goals_team2": 1,
+      "username": "Joao Paulo"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 0,
+      "username": "Guilherme"
+    },
+    {
+      "goals_team1": 2,
+      "goals_team2": 1,
+      "username": "helder"
+    }
+  ],
+  "previous_hash": "e28f11e6b1704de231f8be87ff45a7383fd31aee819780ffc287933f7e053414",
+  "schema": "bolao-copa-2026.audit-block.v1",
+  "verification": {
+    "algorithm": "SHA-256",
+    "canonical_payload": "json.dumps(payload, sort_keys=True, separators=(',', ':'))",
+    "input": "canonical_payload + previous_hash"
+  }
+}

@@ -33,10 +33,40 @@ const FALLBACK_BLOCK_FILES = [
   "block_000027_match_10.json",
   "block_000028_match_4.json",
   "block_000029_match_21.json",
+  "block_000030_match_15.json",
+  "block_000031_match_16.json",
+  "block_000032_match_22.json",
+  "block_000033_match_33.json",
+  "block_000034_match_27.json",
+  "block_000035_match_28.json",
+  "block_000036_match_34.json",
+  "block_000037_match_45.json",
+  "block_000038_match_39.json",
+  "block_000039_match_46.json",
+  "block_000040_match_40.json",
+  "block_000041_match_57.json",
+  "block_000042_match_51.json",
+  "block_000043_match_52.json",
+  "block_000044_match_58.json",
+  "block_000045_match_63.json",
+  "block_000046_match_69.json",
+  "block_000047_match_70.json",
+  "block_000048_match_64.json",
+  "block_000049_match_11.json",
+  "block_000050_match_12.json",
+  "block_000051_match_17.json",
+  "block_000052_match_18.json",
+  "block_000053_match_5.json",
+  "block_000054_match_6.json",
+  "block_000055_match_29.json",
+  "block_000056_match_30.json",
+  "block_000057_match_35.json",
+  "block_000058_match_36.json",
 ];
 
 const state = {
   blocks: [],
+  maxPredictionsInBlock: 0,
   selectedNumber: null,
   query: "",
   statusFilter: "all",
@@ -66,6 +96,7 @@ async function init() {
     const blockFiles = await loadBlockFileList();
     const blocks = await loadBlocks(blockFiles);
     state.blocks = await verifyBlocks(blocks);
+    state.maxPredictionsInBlock = getMaxPredictionsInBlock(state.blocks);
     const initialBlock = getBlockFromLocation() ?? state.blocks.at(-1)?.block_number ?? null;
     state.selectedNumber = initialBlock;
     render();
@@ -119,21 +150,25 @@ async function loadBlockFileList() {
     const files = await response.json();
     const jsonFiles = files
       .filter((file) => file.type === "file" && /^block_\d+.*\.json$/.test(file.name))
-      .map((file) => file.name)
+      .map((file) => ({
+        name: file.name,
+        url: file.download_url ?? getRawBlockUrl(file.name),
+      }))
       .sort(compareBlockFileNames);
 
-    return jsonFiles.length ? jsonFiles : FALLBACK_BLOCK_FILES;
+    return jsonFiles.length ? jsonFiles : getFallbackBlockSources();
   } catch (_error) {
-    return FALLBACK_BLOCK_FILES;
+    return getFallbackBlockSources();
   }
 }
 
-async function loadBlocks(blockFiles) {
+async function loadBlocks(blockSources) {
   const responses = await Promise.all(
-    blockFiles.map(async (fileName) => {
-      const response = await fetch(`blocks/${fileName}`);
+    blockSources.map(async (source) => {
+      const fileName = getBlockSourceName(source);
+      const response = await fetch(getBlockSourceUrl(source));
       if (!response.ok) {
-        throw new Error(`Arquivo não encontrado: blocks/${fileName}`);
+        throw new Error(`Arquivo não encontrado: ${fileName}`);
       }
 
       return {
@@ -212,15 +247,19 @@ function renderChain(blocks) {
 
   blocks.forEach((block) => {
     const button = document.createElement("button");
+    const predictions = getPredictions(block).length;
+    const fillPercent = getBlockFillPercent(block);
     button.type = "button";
     button.className = "chain-node";
     button.classList.toggle("is-selected", block.block_number === state.selectedNumber);
     button.classList.toggle("is-invalid", !block.verificationResult.valid);
-    button.title = `Bloco ${block.block_number}`;
+    button.title = `Bloco ${block.block_number}: ${predictions}/${state.maxPredictionsInBlock} palpites (${Math.round(fillPercent)}%)`;
     button.innerHTML = `
-      <span class="chain-node__cube">${padBlock(block.block_number)}</span>
+      <span class="chain-node__cube" style="--fill-level: ${fillPercent.toFixed(2)}%; --fill-color: ${getBlockFillColor(fillPercent)};">
+        <span class="chain-node__number">${padBlock(block.block_number)}</span>
+      </span>
       <span class="chain-node__label">${escapeHtml(getBlockTitle(block))}</span>
-      <span class="chain-node__hash">${escapeHtml(shortHash(block.hash))}</span>
+      <span class="chain-node__hash">${predictions.toLocaleString("pt-BR")} palpite(s)</span>
     `;
     button.addEventListener("click", () => selectBlock(block.block_number));
     fragment.append(button);
@@ -528,6 +567,24 @@ function getPredictions(block) {
   return Array.isArray(block.payload) ? block.payload : [];
 }
 
+function getMaxPredictionsInBlock(blocks) {
+  return blocks.reduce((max, block) => Math.max(max, getPredictions(block).length), 0);
+}
+
+function getBlockFillPercent(block) {
+  if (!state.maxPredictionsInBlock) {
+    return 0;
+  }
+
+  return Math.min(100, (getPredictions(block).length / state.maxPredictionsInBlock) * 100);
+}
+
+function getBlockFillColor(percent) {
+  const clamped = Math.max(0, Math.min(100, percent));
+  const hue = Math.round((clamped / 100) * 128);
+  return `hsl(${hue} 76% 42%)`;
+}
+
 function getBlockTitle(block) {
   const matches = getMatches(block);
 
@@ -562,8 +619,29 @@ function stripRuntimeFields(block) {
   return raw;
 }
 
+function getFallbackBlockSources() {
+  return FALLBACK_BLOCK_FILES.map((fileName) => ({
+    name: fileName,
+    url: `blocks/${fileName}`,
+  }));
+}
+
+function getBlockSourceName(source) {
+  return typeof source === "string" ? source : source.name;
+}
+
+function getBlockSourceUrl(source) {
+  return typeof source === "string" ? `blocks/${source}` : source.url;
+}
+
+function getRawBlockUrl(fileName) {
+  return `https://raw.githubusercontent.com/${REPOSITORY.owner}/${REPOSITORY.name}/main/blocks/${fileName}`;
+}
+
 function compareBlockFileNames(a, b) {
-  return Number(a.match(/block_(\d+)/)?.[1] ?? 0) - Number(b.match(/block_(\d+)/)?.[1] ?? 0);
+  const blockA = getBlockSourceName(a).match(/block_(\d+)/)?.[1] ?? 0;
+  const blockB = getBlockSourceName(b).match(/block_(\d+)/)?.[1] ?? 0;
+  return Number(blockA) - Number(blockB);
 }
 
 function padBlock(blockNumber) {

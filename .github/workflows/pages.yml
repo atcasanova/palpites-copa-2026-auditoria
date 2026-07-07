@@ -39,6 +39,7 @@ jobs:
           mkdir _site
           cp index.html _site/
           cp -R assets blocks _site/
+          python3 -c 'import json; from pathlib import Path; files = sorted(path.name for path in Path("_site/blocks").glob("block_*.json")); Path("_site/blocks/manifest.json").write_text(json.dumps(files, indent=2) + "\n")'
           touch _site/.nojekyll
 
       - name: Upload artifact

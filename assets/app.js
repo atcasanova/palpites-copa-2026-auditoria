@@ -62,6 +62,44 @@ const FALLBACK_BLOCK_FILES = [
   "block_000056_match_30.json",
   "block_000057_match_35.json",
   "block_000058_match_36.json",
+  "block_000059_match_23.json",
+  "block_000060_match_24.json",
+  "block_000061_match_53.json",
+  "block_000062_match_54.json",
+  "block_000063_match_47.json",
+  "block_000064_match_48.json",
+  "block_000065_match_41.json",
+  "block_000066_match_42.json",
+  "block_000067_match_71.json",
+  "block_000068_match_72.json",
+  "block_000069_match_65.json",
+  "block_000070_match_66.json",
+  "block_000071_match_59.json",
+  "block_000072_match_60.json",
+  "block_000073_match_73.json",
+  "block_000074_match_76.json",
+  "block_000075_match_74.json",
+  "block_000076_match_75.json",
+  "block_000077_match_78.json",
+  "block_000078_match_77.json",
+  "block_000079_match_79.json",
+  "block_000080_match_80.json",
+  "block_000081_match_82.json",
+  "block_000082_match_81.json",
+  "block_000083_match_84.json",
+  "block_000084_match_83.json",
+  "block_000085_match_85.json",
+  "block_000086_match_88.json",
+  "block_000087_match_86.json",
+  "block_000088_match_87.json",
+  "block_000089_match_90.json",
+  "block_000090_match_89.json",
+  "block_000091_match_91.json",
+  "block_000092_match_92.json",
+  "block_000093_match_93.json",
+  "block_000094_match_94.json",
+  "block_000095_match_95.json",
+  "block_000096_match_96.json",
 ];
 
 const state = {
@@ -141,6 +179,7 @@ async function loadBlockFileList() {
   try {
     const response = await fetch(apiUrl, {
       headers: { Accept: "application/vnd.github+json" },
+      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -158,7 +197,8 @@ async function loadBlockFileList() {
 
     return jsonFiles.length ? jsonFiles : getFallbackBlockSources();
   } catch (_error) {
-    return getFallbackBlockSources();
+    const manifestFiles = await loadLocalBlockManifest();
+    return manifestFiles.length ? manifestFiles : getFallbackBlockSources();
   }
 }
 
@@ -166,7 +206,7 @@ async function loadBlocks(blockSources) {
   const responses = await Promise.all(
     blockSources.map(async (source) => {
       const fileName = getBlockSourceName(source);
-      const response = await fetch(getBlockSourceUrl(source));
+      const response = await fetch(getBlockSourceUrl(source), { cache: "no-store" });
       if (!response.ok) {
         throw new Error(`Arquivo não encontrado: ${fileName}`);
       }
@@ -255,7 +295,7 @@ function renderChain(blocks) {
     button.classList.toggle("is-invalid", !block.verificationResult.valid);
     button.title = `Bloco ${block.block_number}: ${predictions}/${state.maxPredictionsInBlock} palpites (${Math.round(fillPercent)}%)`;
     button.innerHTML = `
-      <span class="chain-node__cube" style="--fill-level: ${fillPercent.toFixed(2)}%; --fill-color: ${getBlockFillColor(fillPercent)};">
+      <span class="chain-node__cube" style="--fill-level: ${fillPercent.toFixed(2)}%;">
         <span class="chain-node__number">${padBlock(block.block_number)}</span>
       </span>
       <span class="chain-node__label">${escapeHtml(getBlockTitle(block))}</span>
@@ -579,12 +619,6 @@ function getBlockFillPercent(block) {
   return Math.min(100, (getPredictions(block).length / state.maxPredictionsInBlock) * 100);
 }
 
-function getBlockFillColor(percent) {
-  const clamped = Math.max(0, Math.min(100, percent));
-  const hue = Math.round((clamped / 100) * 128);
-  return `hsl(${hue} 76% 42%)`;
-}
-
 function getBlockTitle(block) {
   const matches = getMatches(block);
 
@@ -624,6 +658,30 @@ function getFallbackBlockSources() {
     name: fileName,
     url: `blocks/${fileName}`,
   }));
+}
+
+async function loadLocalBlockManifest() {
+  try {
+    const response = await fetch("blocks/manifest.json", { cache: "no-store" });
+    if (!response.ok) {
+      return [];
+    }
+
+    const files = await response.json();
+    if (!Array.isArray(files)) {
+      return [];
+    }
+
+    return files
+      .filter((fileName) => /^block_\d+.*\.json$/.test(fileName))
+      .map((fileName) => ({
+        name: fileName,
+        url: `blocks/${fileName}`,
+      }))
+      .sort(compareBlockFileNames);
+  } catch (_error) {
+    return [];
+  }
 }
 
 function getBlockSourceName(source) {
